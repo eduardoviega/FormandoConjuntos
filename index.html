@@ -5,25 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Formando Conjuntos</title>
-    <script src="logica.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="./js/logica.js"></script>
 </head>
-<body><br>
-    <button type="button" id="botao1" onclick="embaralhar()">Embaralhar</button>
-    <p id="numero"></p>
-    <button type="button" id="botao2" onclick="distribuirCartas()">Distribuir Cartas</button>
-    <p id="cartasJogadores"></p>
-    <button type="button" id="botao3" onclick="jogadorAleatorio()">Primeiro jogador</button><br>
-    <p id="jogadores"></p>
-    <input id="input" placeholder="Buscar cartas">
-    <button type="button" id="botao4" onclick="jogadaHumano()">Confirme sua jogada</button>
-    <button type="button" id="botao5" onclick="jogadaMaquina()">Jogada da Máquina</button><br>
-    <p id="escolha"></p>
-    <button type="button" id="botao6" onclick="verificaM()">Verificar cartas da Máquina</button>
-    <button type="button" id="botao7" onclick="verificaH()">Verificar suas cartas</button><br><br>
-    <button type="button" id="botao8" onclick="comprar()">Comprar carta para você</button>
-    <button type="button" id="botao9" onclick="comprarM()">Comprar carta para a Máquina</button><br><br>
-    <p id="conjuntos"></p>
-    <p id="conjuntos2"></p>
-    <p id="final"></p>   
-    </body>
+<body>
+    <header>
+        <h1>Formando Conjuntos</h1>
+    </header>
+
+    <div class="geral">     
+        <div class="topo">
+            <button type="button" id="botao1" onclick="embaralhar()">Embaralhar</button>
+            <button type="button" id="botao2" onclick="distribuirCartas()">Distribuir Cartas</button>
+            <button type="button" id="botao3" onclick="jogadorAleatorio()">Primeiro jogador</button>
+            
+            <p id="cartasJogadores"></p>
+            <p id="textoTopo"></p>
+        </div>
+
+        <div class="localJogadas">
+            <select id="select">
+                <option value="A" selected>A</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="J">J</option>
+                <option value="Q">Q</option>
+                <option value="K">K</option>
+            </select>            
+            <button type="button" id="botao4" onclick="jogadaHumano()">Confirme sua jogada</button>
+            <button type="button" id="botao5" onclick="jogadaMaquina()">Jogada da Máquina</button>
+            
+            <p id="escolha"></p>
+        </div>
+            
+        <div class="verifica">
+            <button type="button" id="botao6" onclick="verificaM()">Verificar cartas da Máquina</button>
+            <button type="button" id="botao7" onclick="verificaH()">Verificar suas cartas</button>
+        </div>
+            
+        <div class="compra">
+            <button type="button" id="botao8" onclick="comprar()">Comprar carta para você</button>
+            <button type="button" id="botao9" onclick="comprarM()">Comprar carta para a Máquina</button>
+        </div>
+            
+        <div class="conjuntosFinal">
+            <p id="conjuntos"></p>
+            <p id="final"></p>
+        </div>
+    </div>
+</body>
 </html>
