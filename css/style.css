@@ -1,0 +1,62 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Times New Roman';
+    background-color: rgb(163, 203, 255);
+}
+
+header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: rgb(41, 133, 255);
+    filter: drop-shadow(0px 0px 5px #00000077);
+}
+
+.geral {
+    width: 40vw;
+    height: auto;
+    filter: drop-shadow(0px 0px 5px #00000077);
+    background-color: rgb(41, 133, 255);
+    padding-top: 20px;
+    border-radius: 20px;
+}
+.geral div{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+#botao2, #botao3, #select, #botao4, #botao5, #botao6, #botao7, #botao8, #botao9{
+    display: none;
+}
+
+button {
+    border-radius: 20px;
+    width: 250px;
+    height: auto;
+    font-size: 14px;
+    background-color: rgb(115, 176, 255);
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px;
+    filter: drop-shadow(8px 8px 2px #00000077);
+}
+select {
+    border-radius: 20px;
+    width: 250px;
+    height: 35px;
+    padding-left: 10px;
+    filter: drop-shadow(8px 8px 2px #00000077);
+}
