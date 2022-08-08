@@ -58,6 +58,49 @@ function embaralhar(){
     trocaTextoTopo("As cartas estão embaralhadas!<br>Distribua as cartas e sorteie o primeiro jogador!")
 }
 
+function conjuntoM(){
+    console.log(" ")
+    console.log(jogadorHumano)
+    console.log(jogadorMaquina)
+    conjuntosMaquina = [0,0,0,0,0,0,0,0,0,0,0,0,0];
+    for(var i=0;i<vetorAuxiliar.length;i++){
+        for(var j=0;j<jogadorMaquina.length;j++){
+            if(jogadorMaquina[j].startsWith(vetorAuxiliar[i])){
+                conjuntosMaquina[i]++;
+                if(conjuntosMaquina[i]==4){
+                    conjuntos4M++;
+                    for(var k=0;k<jogadorMaquina.length;k++){
+                        if(jogadorMaquina[k].startsWith(vetorAuxiliar[i])){
+                            cartasMesa.push(jogadorMaquina[k]);
+                            jogadorMaquina.splice(k,1); 
+                        } 
+                    }
+                }
+            }
+        }
+    }
+}
+
+function conjuntoH(){
+    conjuntosHumano = [0,0,0,0,0,0,0,0,0,0,0,0,0];
+    for(var i=0;i<vetorAuxiliar.length;i++){
+        for(var j=0;j<jogadorHumano.length;j++){
+            if(jogadorHumano[j].startsWith(vetorAuxiliar[i])){
+                conjuntosHumano[i]++;
+                if(conjuntosHumano[i]==4){
+                    conjuntos4H++;
+                    for(var k=0;k<jogadorHumano.length;k++){
+                        if(jogadorHumano[k].startsWith(vetorAuxiliar[i])){
+                            cartasMesa.push(jogadorHumano[k]);
+                            jogadorHumano.splice(k,1); 
+                        } 
+                    }
+                }
+            }
+        }
+    }
+}
+
 function distribuirCartas(){
     esconder("botao2")
     esconder("textoTopo")
@@ -71,6 +114,7 @@ function distribuirCartas(){
     }
     cartasEmbaralhadas.splice(0,14);
     trocaConjuntos("Você fez "+conjuntos4H+" conjuntos!<br>A Máquina fez "+conjuntos4M+" conjuntos!");
+    // trocaCartasJogadores("Suas cartas ("+jogadorHumano.length+"): "+jogadorHumano+".<br>"+"A Máquina possui "+jogadorMaquina.length+" cartas!<br>"+"O monte possui "+cartasEmbaralhadas.length+" cartas!");
     trocaCartasJogadores("Suas cartas ("+jogadorHumano.length+"): "+jogadorHumano+".<br>"+"A Máquina possui "+jogadorMaquina.length+" cartas!<br>"+"O monte possui "+cartasEmbaralhadas.length+" cartas!");
 }
 
@@ -78,7 +122,6 @@ function jogadorAleatorio(){
     esconder("botao3")
     mostrar("textoTopo")
     var players = ["Você começa!<br>Tente adivinhar uma carta que a Máquina tem!","A Máquina começa!<br>Veja qual é a jogada dela!"];
-    // var firstPlayer = 0;
     var firstPlayer = Math.floor(Math.random()*players.length);
     trocaTextoTopo(players[firstPlayer]);
     trocaTextoTopo(players[firstPlayer]);
@@ -103,7 +146,6 @@ function jogadaHumano(){
     var escolha = document.getElementById("select").value;
     trocaEscolha(escolha);
     a = escolha;
-    console.log(a)
 }
 
 function jogadaMaquina(){
@@ -136,26 +178,12 @@ function verificaM(){
         mostrar("botao8")
         mostrar("escolha")
     }
-    conjuntosMaquina = [0,0,0,0,0,0,0,0,0,0,0,0,0];
-    for(var i=0;i<vetorAuxiliar.length;i++){
-        for(var j=0;j<jogadorMaquina.length;j++){
-            if(jogadorMaquina[j].startsWith(vetorAuxiliar[i])){
-                conjuntosMaquina[i]++;
-                if(conjuntosMaquina[i]==4){
-                    conjuntos4M++;
-                    for(var k=0;k<jogadorMaquina.length;k++){
-                        if(jogadorMaquina[k].startsWith(vetorAuxiliar[i])){
-                            cartasMesa.push(jogadorMaquina[k]);
-                            jogadorMaquina.splice(k,1); 
-                        } 
-                    }
-                }
-            }
-        }
-    }
+    
+    conjuntoH()
+    conjuntoM()
+
     trocaConjuntos("Você fez "+conjuntos4H+" conjuntos!<br>A Máquina fez "+conjuntos4M+" conjuntos!");
     trocaCartasJogadores("Suas cartas ("+jogadorHumano.length+"): "+jogadorHumano+".<br>"+"A Máquina possui "+jogadorMaquina.length+" cartas!<br>"+"O monte possui "+cartasEmbaralhadas.length+" cartas!");
-    // fimDeJogo();
 }
         
 function verificaH(){
@@ -176,25 +204,11 @@ function verificaH(){
         esconder("textoTopo")
         mostrar("botao9")
     }
-    conjuntosHumano = [0,0,0,0,0,0,0,0,0,0,0,0,0];
-    for(var i=0;i<vetorAuxiliar.length;i++){
-        for(var j=0;j<jogadorHumano.length;j++){
-            if(jogadorHumano[j].startsWith(vetorAuxiliar[i])){
-                conjuntosHumano[i]++;
-                if(conjuntosHumano[i]==4){
-                    conjuntos4H++;
-                    for(var k=0;k<jogadorHumano.length;k++){
-                        if(jogadorHumano[k].startsWith(vetorAuxiliar[i])){
-                            cartasMesa.push(jogadorHumano[k]);
-                            jogadorHumano.splice(k,1); 
-                        } 
-                    }
-                }
-            }
-        }
-    }
+    
+    conjuntoH()
+    conjuntoM()
+
     trocaCartasJogadores("Suas cartas ("+jogadorHumano.length+"): "+jogadorHumano+".<br>"+"A Máquina possui "+jogadorMaquina.length+" cartas!<br>"+"O monte possui "+cartasEmbaralhadas.length+" cartas!");
-    // fimDeJogo();
 }
 
 function comprar(){
@@ -204,7 +218,40 @@ function comprar(){
     cartasEmbaralhadas.splice(cartasEmbaralhadas,1);
     trocaEscolha("Vez da Máquina!");              
     trocaCartasJogadores("Suas cartas ("+jogadorHumano.length+"): "+jogadorHumano+".<br>"+"A Máquina possui "+jogadorMaquina.length+" cartas!<br>"+"O monte possui "+cartasEmbaralhadas.length+" cartas!");
-    if(cartasEmbaralhadas.length==0){
+    if(cartasEmbaralhadas.length==0 || jogadorMaquina.length === 0 || jogadorHumano.length === 0){
+        esconder("botao6")
+        esconder("botao7")
+        esconder("escolha")
+        if(conjuntos4H>conjuntos4M || jogadorMaquina.length === 0){
+            trocaFinal("Você ganhou o jogo!!!");
+        }
+        if(conjuntos4H<conjuntos4M || jogadorHumano.length === 0){
+            trocaFinal("Você perdeu o jogo!!!");
+        }
+        if(conjuntos4H==conjuntos4M){
+            trocaFinal("O jogo empatou!!!");
+        }
+    }
+    
+    conjuntoH()
+    conjuntoM()
+
+    trocaCartasJogadores("Suas cartas ("+jogadorHumano.length+"): "+jogadorHumano+".<br>"+"A Máquina possui "+jogadorMaquina.length+" cartas!<br>"+"O monte possui "+cartasEmbaralhadas.length+" cartas!");
+    trocaConjuntos("Você fez "+conjuntos4H+" conjuntos!<br>A Máquina fez "+conjuntos4M+" conjuntos!");
+}
+
+function comprarM(){
+    esconder("botao9")
+    mostrar("select")
+    mostrar("botao4")
+    jogadorMaquina.push(cartasEmbaralhadas[0]);
+    cartasEmbaralhadas.splice(cartasEmbaralhadas,1);
+    trocaEscolha("Sua vez!");              
+    trocaCartasJogadores("Suas cartas ("+jogadorHumano.length+"): "+jogadorHumano+".<br>"+"A Máquina possui "+jogadorMaquina.length+" cartas!<br>"+"O monte possui "+cartasEmbaralhadas.length+" cartas!");
+    if(cartasEmbaralhadas.length==0 || jogadorMaquina.length === 0 || jogadorHumano.length === 0){
+        esconder("botao6")
+        esconder("botao7")
+        esconder("escolha")
         if(conjuntos4H>conjuntos4M){
             trocaFinal("Você ganhou o jogo!!!");
         }
@@ -215,94 +262,10 @@ function comprar(){
             trocaFinal("O jogo empatou!!!");
         }
     }
-    conjuntosHumano = [0,0,0,0,0,0,0,0,0,0,0,0,0];
-    for(var i=0;i<vetorAuxiliar.length;i++){
-        for(var j=0;j<jogadorHumano.length;j++){
-            if(jogadorHumano[j].startsWith(vetorAuxiliar[i])){
-                conjuntosHumano[i]++;
-                if(conjuntosHumano[i]==4){
-                    conjuntos4H++;
-                    for(var k=0;k<jogadorHumano.length;k++){
-                        if(jogadorHumano[k].startsWith(vetorAuxiliar[i])){
-                            cartasMesa.push(jogadorHumano[k]);
-                            jogadorHumano.splice(k,1); 
-                        } 
-                    }
-                }
-            }
-        }
-    }
-    conjuntosMaquina = [0,0,0,0,0,0,0,0,0,0,0,0,0];
-    for(var i=0;i<vetorAuxiliar.length;i++){
-        for(var j=0;j<jogadorMaquina.length;j++){
-            if(jogadorMaquina[j].startsWith(vetorAuxiliar[i])){
-                conjuntosMaquina[i]++;
-                if(conjuntosMaquina[i]==4){
-                    conjuntos4M++;
-                    for(var k=0;k<jogadorMaquina.length;k++){
-                        if(jogadorMaquina[k].startsWith(vetorAuxiliar[i])){
-                            cartasMesa.push(jogadorMaquina[k]);
-                            jogadorMaquina.splice(k,1); 
-                        } 
-                    }
-                }
-            }
-        }
-    }
-    console.log(conjuntosHumano)
-    console.log(conjuntosMaquina)
-    trocaCartasJogadores("Suas cartas ("+jogadorHumano.length+"): "+jogadorHumano+".<br>"+"A Máquina possui "+jogadorMaquina.length+" cartas!<br>"+"O monte possui "+cartasEmbaralhadas.length+" cartas!");
-    trocaConjuntos("Você fez "+conjuntos4H+" conjuntos!<br>A Máquina fez "+conjuntos4M+" conjuntos!");
-}
-function comprarM(){
-    esconder("botao9")
-    mostrar("select")
-    mostrar("botao4")
-    jogadorMaquina.push(cartasEmbaralhadas[0]);
-    cartasEmbaralhadas.splice(cartasEmbaralhadas,1);
-    trocaEscolha("Sua vez!");              
-    trocaCartasJogadores("Suas cartas ("+jogadorHumano.length+"): "+jogadorHumano+".<br>"+"A Máquina possui "+jogadorMaquina.length+" cartas!<br>"+"O monte possui "+cartasEmbaralhadas.length+" cartas!");
-    if(cartasEmbaralhadas.length==0){
-        if(conjuntos4H>conjuntos4M){
-            trocaFinal("Você ganhou o jogo!!!");
-        }else{
-            trocaFinal("Você perdeu o jogo!!!");
-        }
-    }
-    conjuntosHumano = [0,0,0,0,0,0,0,0,0,0,0,0,0];
-    for(var i=0;i<vetorAuxiliar.length;i++){
-        for(var j=0;j<jogadorHumano.length;j++){
-            if(jogadorHumano[j].startsWith(vetorAuxiliar[i])){
-                conjuntosHumano[i]++;
-                if(conjuntosHumano[i]==4){
-                    conjuntos4H++;
-                    for(var k=0;k<jogadorHumano.length;k++){
-                        if(jogadorHumano[k].startsWith(vetorAuxiliar[i])){
-                            cartasMesa.push(jogadorHumano[k]);
-                            jogadorHumano.splice(k,1); 
-                        } 
-                    }
-                }
-            }
-        }
-    }
-    conjuntosMaquina = [0,0,0,0,0,0,0,0,0,0,0,0,0];
-    for(var i=0;i<vetorAuxiliar.length;i++){
-        for(var j=0;j<jogadorMaquina.length;j++){
-            if(jogadorMaquina[j].startsWith(vetorAuxiliar[i])){
-                conjuntosMaquina[i]++;
-                if(conjuntosMaquina[i]==4){
-                    conjuntos4M++;
-                    for(var k=0;k<jogadorMaquina.length;k++){
-                        if(jogadorMaquina[k].startsWith(vetorAuxiliar[i])){
-                            cartasMesa.push(jogadorMaquina[k]);
-                            jogadorMaquina.splice(k,1); 
-                        } 
-                    }
-                }
-            }
-        }
-    }
+    
+    conjuntoH()
+    conjuntoM()
+    
     trocaCartasJogadores("Suas cartas ("+jogadorHumano.length+"): "+jogadorHumano+".<br>"+"A Máquina possui "+jogadorMaquina.length+" cartas!<br>"+"O monte possui "+cartasEmbaralhadas.length+" cartas!");
     trocaConjuntos("Você fez "+conjuntos4H+" conjuntos!<br>A Máquina fez "+conjuntos4M+" conjuntos!");
 }
