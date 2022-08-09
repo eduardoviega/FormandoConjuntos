@@ -14,7 +14,7 @@ body {
 header {
     display: flex;
     align-items: center;
-    flex-direction: column;
+    justify-content: space-between;
     position: fixed;
     width: 100%;
     top: 0;
@@ -25,11 +25,11 @@ header {
 
 .geral {
     width: auto;
-    min-width: 50vw;
+    min-width: 45vw;
     height: auto;
     filter: drop-shadow(0px 0px 5px #00000077);
     background-color: #0b71e0;
-    padding: 40px 20px;
+    padding: 30px 20px;
     border-radius: 20px;
 }
 .geral div{ 
@@ -51,7 +51,7 @@ header {
     display: none;
 }
 
-button {
+.botao {
     border-radius: 20px;
     width: 250px;
     height: auto;
@@ -69,4 +69,47 @@ select {
     height: 35px;
     padding-left: 10px;
     filter: drop-shadow(8px 8px 2px #00000077);
+}
+
+
+#divRegras{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0px 20px 0 0;
+}
+
+#botaoRegras{
+    border-radius: 20px;
+    width: auto;
+    height: auto;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+    padding: 8px 15px;
+    margin: 5px;
+    background-color: rgb(234, 255, 115);
+    filter: drop-shadow(5px 5px 2px #00000077);
+}
+
+@media (max-width: 500px) {
+    header{
+        flex-direction: column;
+        font-size: 14px;
+    }
+    #botaoFalso{
+        display: none;
+    }
+    #botaoRegras{
+        width: 100px;
+        margin: 0 0 15px 0;
+    }
+    .geral{
+        margin-top: 120px;
+        min-width: none;
+    }
+    #cartasJogadores{
+        max-width: 450px;
+    }
 }

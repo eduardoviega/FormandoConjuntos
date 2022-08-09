@@ -1,6 +1,12 @@
-# Nome do jogo: Formando conjuntos
+# Nome do jogo: Formando Conjuntos
 
-Este é um jogo de cartas para 2 jogadores.<br>
+### Link do Jogo:
+
+><a href="https://eduardoviega.github.io/FormandoConjuntos/"> Acesse aqui!</a>
+
+### Regras do Jogo:
+
+>Este é um jogo de cartas para 2 jogadores.<br>
 Inicialmente, cada jogador recebe 7 cartas.<br>
 As cartas restantes são colocadas na mesa, viradas para baixo, formando uma pilha de compra de
 cartas.<br>

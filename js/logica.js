@@ -71,14 +71,14 @@ function conjuntoM(){
             }
         }
     }
-    // console.table('M: '+conjuntosMaquina)
-    // console.table(`   ${jogadorMaquina}`)
-    // console.table(`H: ${jogadorHumano}`)
-    // console.table('E: '+cartasEmbaralhadas)
-    // console.table('M: '+conjuntos4M)
-    // console.table('H: '+conjuntos4H)
+    console.table('M: '+conjuntosMaquina)
+    console.table(`   ${jogadorMaquina}`)
+    console.table(`H: ${jogadorHumano}`)
+    console.table('E: '+cartasEmbaralhadas)
+    console.table('M: '+conjuntos4M)
+    console.table('H: '+conjuntos4H)
     
-    // console.log(" ")
+    console.log(" ")
 }
 
 function conjuntoH(){
@@ -99,7 +99,7 @@ function conjuntoH(){
             }
         }
     }
-    // console.log('H: '+conjuntosHumano)
+    console.log('H: '+conjuntosHumano)
 }
 
 function distribuirCartas(){
@@ -208,6 +208,7 @@ function verificaH(){
             trocaEscolha("A Máquina acertou, é vez dela novamente!");
             esconder("botao7")
             mostrar("botao5")
+            i--;
         }
     }
     if(!achou){
