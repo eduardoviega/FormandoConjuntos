@@ -1,21 +1,10 @@
-var cartas = ["AC","AE","AO","AP","2C","2E","2O","2P","3C","3E","3O","3P","4C","4E","4O","4P","5C","5E","5O","5P","6C","6E","6O","6P","7C","7E","7O","7P","8C","8E","8O","8P","9C","9E","9O","9P","10C","10E","10O","10P","JC","JE","JO","JP","QC","QE","QO","QP","KC","KE","KO","KP"];
-var cartasOriginal = ["AC","AE","AO","AP","2C","2E","2O","2P","3C","3E","3O","3P","4C","4E","4O","4P","5C","5E","5O","5P","6C","6E","6O","6P","7C","7E","7O","7P","8C","8E","8O","8P","9C","9E","9O","9P","10C","10E","10O","10P","JC","JE","JO","JP","QC","QE","QO","QP","KC","KE","KO","KP"];
-var numeros = ["A",2,3,4,5,6,7,8,9,10,"J","Q","K"];
 var cartasEmbaralhadas = [];
-var valorAleatorio = 0;
 var jogadorHumano = [];
 var jogadorMaquina = [];
-var escolha = 0;
-var numero = [];
-var mesa = [];
 var a = "" ;
 var vetorAuxiliar = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"]
-var conjuntosHumano = [0,0,0,0,0,0,0,0,0,0,0,0,0];
-var conjuntosMaquina = [0,0,0,0,0,0,0,0,0,0,0,0,0];
 var conjuntos4H = 0;
 var conjuntos4M = 0;
-var cartasMesa = [];
-
 
 
 function trocaTextoTopo(texto) {
@@ -24,6 +13,7 @@ function trocaTextoTopo(texto) {
 
 function trocaCartasJogadores(texto) {
     document.getElementById("cartasJogadores").innerHTML = texto
+    document.getElementById("cartasJogadores").style.backgroundColor = "#fff"
 }
 
 function trocaConjuntos(texto) {
@@ -38,12 +28,15 @@ function trocaFinal(texto) {
     document.getElementById("final").innerHTML = texto
 }
 
+
 function mostrar(id){
     document.getElementById(id).style.display = "initial"
 }
+
 function esconder(id){
     document.getElementById(id).style.display = "none"
 }
+
 
 function embaralhar(){
     mostrar("botao2")
@@ -51,18 +44,17 @@ function embaralhar(){
     var cartas = ["AC","AE","AO","AP","2C","2E","2O","2P","3C","3E","3O","3P","4C","4E","4O","4P","5C","5E","5O","5P","6C","6E","6O","6P","7C","7E","7O","7P","8C","8E","8O","8P","9C","9E","9O","9P","10C","10E","10O","10P","JC","JE","JO","JP","QC","QE","QO","QP","KC","KE","KO","KP"];
     cartasEmbaralhadas = [];
     while(cartas.length!=0){
-        valorAleatorio = Math.floor(Math.random()*cartas.length);
+        var valorAleatorio = Math.floor(Math.random()*cartas.length);
         cartasEmbaralhadas.push(cartas[valorAleatorio]);
         cartas.splice(valorAleatorio,1);
     }
+    
     trocaTextoTopo("As cartas estão embaralhadas!<br>Distribua as cartas e sorteie o primeiro jogador!")
+    trocaConjuntos("<b>Você fez:</b> "+conjuntos4H+" conjuntos!<br><b>A Máquina fez:</b> "+conjuntos4M+" conjuntos!")
 }
 
 function conjuntoM(){
-    console.log(" ")
-    console.log(jogadorHumano)
-    console.log(jogadorMaquina)
-    conjuntosMaquina = [0,0,0,0,0,0,0,0,0,0,0,0,0];
+    var conjuntosMaquina = [0,0,0,0,0,0,0,0,0,0,0,0,0];
     for(var i=0;i<vetorAuxiliar.length;i++){
         for(var j=0;j<jogadorMaquina.length;j++){
             if(jogadorMaquina[j].startsWith(vetorAuxiliar[i])){
@@ -71,18 +63,26 @@ function conjuntoM(){
                     conjuntos4M++;
                     for(var k=0;k<jogadorMaquina.length;k++){
                         if(jogadorMaquina[k].startsWith(vetorAuxiliar[i])){
-                            cartasMesa.push(jogadorMaquina[k]);
-                            jogadorMaquina.splice(k,1); 
+                            jogadorMaquina.splice(k,1);
                         } 
                     }
+                    jogadorMaquina.splice(-1,1);
                 }
             }
         }
     }
+    // console.table('M: '+conjuntosMaquina)
+    // console.table(`   ${jogadorMaquina}`)
+    // console.table(`H: ${jogadorHumano}`)
+    // console.table('E: '+cartasEmbaralhadas)
+    // console.table('M: '+conjuntos4M)
+    // console.table('H: '+conjuntos4H)
+    
+    // console.log(" ")
 }
 
 function conjuntoH(){
-    conjuntosHumano = [0,0,0,0,0,0,0,0,0,0,0,0,0];
+    var conjuntosHumano = [0,0,0,0,0,0,0,0,0,0,0,0,0];
     for(var i=0;i<vetorAuxiliar.length;i++){
         for(var j=0;j<jogadorHumano.length;j++){
             if(jogadorHumano[j].startsWith(vetorAuxiliar[i])){
@@ -91,20 +91,22 @@ function conjuntoH(){
                     conjuntos4H++;
                     for(var k=0;k<jogadorHumano.length;k++){
                         if(jogadorHumano[k].startsWith(vetorAuxiliar[i])){
-                            cartasMesa.push(jogadorHumano[k]);
                             jogadorHumano.splice(k,1); 
                         } 
                     }
+                    jogadorHumano.splice(-1,1);
                 }
             }
         }
     }
+    // console.log('H: '+conjuntosHumano)
 }
 
 function distribuirCartas(){
     esconder("botao2")
     esconder("textoTopo")
     mostrar("botao3")
+    mostrar("cartasJogadores")
     for(var i=0;i<14;i++){
         if(i<7){
             jogadorHumano.push(cartasEmbaralhadas[i]);
@@ -113,14 +115,19 @@ function distribuirCartas(){
         }
     }
     cartasEmbaralhadas.splice(0,14);
-    trocaConjuntos("Você fez "+conjuntos4H+" conjuntos!<br>A Máquina fez "+conjuntos4M+" conjuntos!");
-    // trocaCartasJogadores("Suas cartas ("+jogadorHumano.length+"): "+jogadorHumano+".<br>"+"A Máquina possui "+jogadorMaquina.length+" cartas!<br>"+"O monte possui "+cartasEmbaralhadas.length+" cartas!");
-    trocaCartasJogadores("Suas cartas ("+jogadorHumano.length+"): "+jogadorHumano+".<br>"+"A Máquina possui "+jogadorMaquina.length+" cartas!<br>"+"O monte possui "+cartasEmbaralhadas.length+" cartas!");
+
+    //======
+    conjuntoM()
+    //====== 
+
+    trocaCartasJogadores("<b>Suas cartas ("+jogadorHumano.length+"):</b> "+jogadorHumano+".<br>"+"<b>A Máquina possui:</b> "+jogadorMaquina.length+" cartas!<br>"+"<b>O Monte possui:</b> "+cartasEmbaralhadas.length+" cartas!");
+    trocaConjuntos("<b>Você fez:</b> "+conjuntos4H+" conjuntos!<br><b>A Máquina fez:</b> "+conjuntos4M+" conjuntos!");
 }
 
 function jogadorAleatorio(){
     esconder("botao3")
     mostrar("textoTopo")
+    mostrar("conjuntos")
     var players = ["Você começa!<br>Tente adivinhar uma carta que a Máquina tem!","A Máquina começa!<br>Veja qual é a jogada dela!"];
     var firstPlayer = Math.floor(Math.random()*players.length);
     trocaTextoTopo(players[firstPlayer]);
@@ -146,15 +153,20 @@ function jogadaHumano(){
     var escolha = document.getElementById("select").value;
     trocaEscolha(escolha);
     a = escolha;
+    trocaCartasJogadores("<b>Suas cartas ("+jogadorHumano.length+"):</b> "+jogadorHumano+".<br>"+"<b>A Máquina possui:</b> "+jogadorMaquina.length+" cartas!<br>"+"<b>O Monte possui:</b> "+cartasEmbaralhadas.length+" cartas!");
+    trocaConjuntos("<b>Você fez:</b> "+conjuntos4H+" conjuntos!<br><b>A Máquina fez:</b> "+conjuntos4M+" conjuntos!");
 }
 
 function jogadaMaquina(){
     esconder("botao5")
     mostrar("botao7")
+    mostrar("escolha")
     var numeros = ["A",2,3,4,5,6,7,8,9,10,"J","Q","K"];
     jogadaAleatoria = Math.floor(Math.random()*numeros.length);
     trocaEscolha(numeros[jogadaAleatoria]);
     a = numeros[jogadaAleatoria] +"";
+    trocaCartasJogadores("<b>Suas cartas ("+jogadorHumano.length+"):</b> "+jogadorHumano+".<br>"+"<b>A Máquina possui:</b> "+jogadorMaquina.length+" cartas!<br>"+"<b>O Monte possui:</b> "+cartasEmbaralhadas.length+" cartas!");
+    trocaConjuntos("<b>Você fez:</b> "+conjuntos4H+" conjuntos!<br><b>A Máquina fez:</b> "+conjuntos4M+" conjuntos!");
 }
 
 function verificaM(){
@@ -182,8 +194,8 @@ function verificaM(){
     conjuntoH()
     conjuntoM()
 
-    trocaConjuntos("Você fez "+conjuntos4H+" conjuntos!<br>A Máquina fez "+conjuntos4M+" conjuntos!");
-    trocaCartasJogadores("Suas cartas ("+jogadorHumano.length+"): "+jogadorHumano+".<br>"+"A Máquina possui "+jogadorMaquina.length+" cartas!<br>"+"O monte possui "+cartasEmbaralhadas.length+" cartas!");
+    trocaCartasJogadores("<b>Suas cartas ("+jogadorHumano.length+"):</b> "+jogadorHumano+".<br>"+"<b>A Máquina possui:</b> "+jogadorMaquina.length+" cartas!<br>"+"<b>O Monte possui:</b> "+cartasEmbaralhadas.length+" cartas!");
+    trocaConjuntos("<b>Você fez:</b> "+conjuntos4H+" conjuntos!<br><b>A Máquina fez:</b> "+conjuntos4M+" conjuntos!");
 }
         
 function verificaH(){
@@ -208,7 +220,7 @@ function verificaH(){
     conjuntoH()
     conjuntoM()
 
-    trocaCartasJogadores("Suas cartas ("+jogadorHumano.length+"): "+jogadorHumano+".<br>"+"A Máquina possui "+jogadorMaquina.length+" cartas!<br>"+"O monte possui "+cartasEmbaralhadas.length+" cartas!");
+    trocaCartasJogadores("<b>Suas cartas ("+jogadorHumano.length+"):</b> "+jogadorHumano+".<br>"+"<b>A Máquina possui:</b> "+jogadorMaquina.length+" cartas!<br>"+"<b>O Monte possui:</b> "+cartasEmbaralhadas.length+" cartas!");
 }
 
 function comprar(){
@@ -217,7 +229,8 @@ function comprar(){
     jogadorHumano.push(cartasEmbaralhadas[0]);
     cartasEmbaralhadas.splice(cartasEmbaralhadas,1);
     trocaEscolha("Vez da Máquina!");              
-    trocaCartasJogadores("Suas cartas ("+jogadorHumano.length+"): "+jogadorHumano+".<br>"+"A Máquina possui "+jogadorMaquina.length+" cartas!<br>"+"O monte possui "+cartasEmbaralhadas.length+" cartas!");
+    trocaCartasJogadores("<b>Suas cartas ("+jogadorHumano.length+"):</b> "+jogadorHumano+".<br>"+"<b>A Máquina possui:</b> "+jogadorMaquina.length+" cartas!<br>"+"<b>O Monte possui:</b> "+cartasEmbaralhadas.length+" cartas!");
+    
     if(cartasEmbaralhadas.length==0 || jogadorMaquina.length === 0 || jogadorHumano.length === 0){
         esconder("botao6")
         esconder("botao7")
@@ -236,8 +249,8 @@ function comprar(){
     conjuntoH()
     conjuntoM()
 
-    trocaCartasJogadores("Suas cartas ("+jogadorHumano.length+"): "+jogadorHumano+".<br>"+"A Máquina possui "+jogadorMaquina.length+" cartas!<br>"+"O monte possui "+cartasEmbaralhadas.length+" cartas!");
-    trocaConjuntos("Você fez "+conjuntos4H+" conjuntos!<br>A Máquina fez "+conjuntos4M+" conjuntos!");
+    trocaCartasJogadores("<b>Suas cartas ("+jogadorHumano.length+"):</b> "+jogadorHumano+".<br>"+"<b>A Máquina possui:</b> "+jogadorMaquina.length+" cartas!<br>"+"<b>O Monte possui:</b> "+cartasEmbaralhadas.length+" cartas!");
+    trocaConjuntos("<b>Você fez:</b> "+conjuntos4H+" conjuntos!<br><b>A Máquina fez:</b> "+conjuntos4M+" conjuntos!");
 }
 
 function comprarM(){
@@ -246,8 +259,9 @@ function comprarM(){
     mostrar("botao4")
     jogadorMaquina.push(cartasEmbaralhadas[0]);
     cartasEmbaralhadas.splice(cartasEmbaralhadas,1);
+    
     trocaEscolha("Sua vez!");              
-    trocaCartasJogadores("Suas cartas ("+jogadorHumano.length+"): "+jogadorHumano+".<br>"+"A Máquina possui "+jogadorMaquina.length+" cartas!<br>"+"O monte possui "+cartasEmbaralhadas.length+" cartas!");
+    trocaCartasJogadores("<b>Suas cartas ("+jogadorHumano.length+"):</b> "+jogadorHumano+".<br>"+"<b>A Máquina possui:</b> "+jogadorMaquina.length+" cartas!<br>"+"<b>O Monte possui:</b> "+cartasEmbaralhadas.length+" cartas!");
     if(cartasEmbaralhadas.length==0 || jogadorMaquina.length === 0 || jogadorHumano.length === 0){
         esconder("botao6")
         esconder("botao7")
@@ -266,6 +280,6 @@ function comprarM(){
     conjuntoH()
     conjuntoM()
     
-    trocaCartasJogadores("Suas cartas ("+jogadorHumano.length+"): "+jogadorHumano+".<br>"+"A Máquina possui "+jogadorMaquina.length+" cartas!<br>"+"O monte possui "+cartasEmbaralhadas.length+" cartas!");
-    trocaConjuntos("Você fez "+conjuntos4H+" conjuntos!<br>A Máquina fez "+conjuntos4M+" conjuntos!");
+    trocaCartasJogadores("<b>Suas cartas ("+jogadorHumano.length+"):</b> "+jogadorHumano+".<br>"+"<b>A Máquina possui:</b> "+jogadorMaquina.length+" cartas!<br>"+"<b>O Monte possui:</b> "+cartasEmbaralhadas.length+" cartas!");
+    trocaConjuntos("<b>Você fez:</b> "+conjuntos4H+" conjuntos!<br><b>A Máquina fez:</b> "+conjuntos4M+" conjuntos!");
 }
