@@ -3,12 +3,11 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 100vw;
     height: 100vh;
     margin: 0;
     padding: 0;
     font-family: 'Times New Roman';
-    background-color: rgb(163, 203, 255);
+    background-color: rgb(163, 203, 255);   
 }
 
 header {
