@@ -80,7 +80,6 @@ select {
     }
     #botaoRegras{
         width: 100px;
-        margin: 0 0 15px 0;
     }
     .geral{
         margin-top: 120px;
@@ -88,6 +87,9 @@ select {
     }
     #cartasJogadores{
         max-width: 450px;
+    }
+    .modal__content{
+        font-size: 12px;
     }
 }
 
@@ -141,6 +143,7 @@ select {
     max-width: 90%;
     background: #fff;
     padding: 1em 2em;
+    font-size: 14px;
 }
 
 .modal__close {

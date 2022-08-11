@@ -17,10 +17,10 @@ function trocaConjuntos() {
 }
 
 function atualizaCampos(){
-    trocaCartasJogadores()
-    trocaConjuntos()
     conjuntoH()
     conjuntoM()
+    trocaCartasJogadores()
+    trocaConjuntos()
 }
 
 function trocaTextoTopo(texto) {
