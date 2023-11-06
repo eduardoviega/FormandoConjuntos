@@ -7,7 +7,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Times New Roman';
-    background-color: rgb(163, 203, 255);   
+    background-image: url("../assets/table.png");
+    background-size: 100% 100%;
 }
 
 header {
@@ -18,7 +19,7 @@ header {
     width: 100%;
     top: 0;
     color: #fff;
-    background-color: #0b71e0;
+    background-color: #178c3c;
     filter: drop-shadow(0px 0px 5px #00000077);
 }
 
@@ -27,7 +28,7 @@ header {
     min-width: 45vw;
     height: auto;
     filter: drop-shadow(0px 0px 5px #00000077);
-    background-color: #0b71e0;
+    background-color: #178c3c;
     padding: 30px 20px;
     border-radius: 20px;
 }
@@ -38,16 +39,22 @@ header {
     flex-direction: column;
 }
 
-#cartasJogadores {
+.fundoBranco {
     padding: 15px;
     border-radius: 20px;
     filter: drop-shadow(0px 0px 5px #00000077);
+    background: rgb(255, 255, 255);
 }
 
 #botao2, #botao3, #select, #botao4, #botao5, 
 #botao6, #botao7, #botao8, #botao9, #textoTopo, 
 #cartasJogadores, #escolha, #conjuntos{
     display: none;
+}
+
+.cartas {
+    display: contents !important;
+    font-size: 18px;
 }
 
 .botao {
@@ -59,7 +66,7 @@ header {
     cursor: pointer;
     padding: 10px;
     margin: 5px;
-    background-color: rgb(115, 176, 255);
+    background-color: #2bc24b;
     filter: drop-shadow(8px 8px 2px #00000077);
 }
 select {
@@ -112,7 +119,7 @@ select {
     margin: 5px;
     text-decoration: none;
     color: #000;
-    background-color: rgb(255, 255, 255);
+    background-color: #2bc24b;
     filter: drop-shadow(5px 5px 2px #00000077);
 }
 
@@ -154,4 +161,8 @@ select {
     color: #585858;
     text-decoration: none;
     transform: scale(2);
+}
+
+.logo {
+    padding: 5px;
 }

@@ -8,8 +8,10 @@ var conjuntos4M = 0
 
 
 function trocaCartasJogadores() {
-    document.getElementById("cartasJogadores").innerHTML = "<b>Suas cartas ("+jogadorHumano.length+"):</b> "+jogadorHumano+".<br>"+"<b>A Máquina possui:</b> "+jogadorMaquina.length+" cartas!<br>"+"<b>O Monte possui:</b> "+cartasEmbaralhadas.length+" cartas!"
+    document.getElementsByClassName("cartas")[0].innerHTML = "<b>Suas cartas ("+jogadorHumano.length+"):</b>"
+    document.getElementById("cartasJogadores").innerHTML = "<b>A Máquina possui:</b> "+jogadorMaquina.length+" cartas!<br>"+"<b>O Monte possui:</b> "+cartasEmbaralhadas.length+" cartas!"
     document.getElementById("cartasJogadores").style.backgroundColor = "#fff"
+    verificaCartasHumano()
 }
 
 function trocaConjuntos() {
@@ -43,6 +45,32 @@ function esconder(id){
     document.getElementById(id).style.display = "none"
 }
 
+function verificaCartasHumano() {
+    let cartas = document.getElementsByClassName("cartas")[0]
+
+    if(document.getElementsByClassName("cartasDoJogador")[0] != null)
+        document.getElementsByClassName("cartasDoJogador")[0].remove()
+
+    let cartasDoJogador = document.createElement("div")
+    cartasDoJogador.className = "cartasDoJogador"
+    cartasDoJogador.style.flexDirection = "row"
+    cartasDoJogador.style.justifyContent = "center"
+    cartasDoJogador.style.flexWrap = "wrap"
+    cartasDoJogador.style.maxWidth = "90vw"
+
+    cartas.append(cartasDoJogador)
+    jogadorHumano.forEach(carta => {
+        adicionarCarta("cartasDoJogador", carta)
+    })
+}
+
+function adicionarCarta(local, carta) {
+    let img = document.createElement('img');
+    img.src = `assets/cards/${carta}.png`;
+    img.style.width = "100px"
+    img.style.padding = "5px"
+    document.getElementsByClassName(local)[0].appendChild(img);
+}
 
 function embaralhar(){
     mostrar("botao2")
@@ -106,7 +134,7 @@ function distribuirCartas(){
     mostrar("botao3")
     mostrar("cartasJogadores")
 
-    for(var i=0;i<14;i++){
+    for(var i=0; i<14; i++){
         if(i<7){
             jogadorHumano.push(cartasEmbaralhadas[i])
         }else{
@@ -123,7 +151,7 @@ function jogadorAleatorio(){
     mostrar("textoTopo")
     mostrar("conjuntos")
 
-    var players = ["Você começa!<br>Tente adivinhar uma carta que a Máquina tem!","A Máquina começa!<br>Veja qual é a jogada dela!"]
+    var players = ["<b>Você começa!</b><br>Tente adivinhar uma carta que a Máquina tem!","<b>A Máquina começa!</b><br>Veja qual é a jogada dela!"]
     var firstPlayer = Math.floor(Math.random()*players.length)
     trocaTextoTopo(players[firstPlayer])
     trocaTextoTopo(players[firstPlayer])
@@ -188,7 +216,6 @@ function verificaM(){
         mostrar("botao8")
         mostrar("escolha")
     }
-    
     atualizaCampos()
 }
         
@@ -211,7 +238,6 @@ function verificaH(){
         esconder("textoTopo")
         mostrar("botao9")
     }
-    
     atualizaCampos()
 }
 
@@ -238,7 +264,6 @@ function comprar(){
             trocaFinal("O jogo empatou!!!")
         }
     }
-    
     atualizaCampos()
 }
 
@@ -266,6 +291,5 @@ function comprarM(){
             trocaFinal("O jogo empatou!!!")
         }
     }
-    
     atualizaCampos()
 }
